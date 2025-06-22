@@ -28,6 +28,9 @@ jobs:
            service_account_key: ${{ secrets.GCP_CREDENTIALS }}
            project_id: favorable-axe-463603-r1
 
+       - name: Show gcloud info
+         run: gcloud config list
+
        - name: Build the Docker image
          run: gcloud builds submit --tag us-central1-docker.pkg.dev/favorable-axe-463603-r1/notely-ar-repo/notely:latest . 
     
