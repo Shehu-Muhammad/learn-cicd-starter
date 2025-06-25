@@ -5,12 +5,12 @@ on:
     branches: [main]
 
 jobs:
-    deploy: 
-     name: Deploy
-     runs-on: ubuntu-latest
-     timeout-minutes: 30
+  deploy: 
+    name: Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     
-     steps:
+    steps:
        - name: Check out code
          uses: actions/checkout@v4
 
@@ -34,4 +34,7 @@ jobs:
 
        - name: Build the Docker image
          run: gcloud builds submit --tag us-central1-docker.pkg.dev/favorable-axe-463603-r1/notely-ar-repo/notely:latest . 
+      
+       - name: Deploy to Cloud Run
+         run: gcloud run deploy notely --image us-central1-docker.pkg.dev/favorable-axe-463603-r1/notely-ar-repo/notely:latest --region us-central1 --allow-unauthenticated --project favorable-axe-463603-r1 --max-instances=4
     
